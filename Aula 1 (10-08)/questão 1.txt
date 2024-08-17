@@ -1,0 +1,30 @@
+sql:
+
+CREATE TABLE Pais (
+  id BIGINT PRIMARY KEY,
+  nome CHAR(100)
+);
+
+CREATE TABLE Vinho (
+  id BIGINT PRIMARY KEY,
+  nome CHAR(100),
+  preco NUMERIC,
+  origem BIGINT references Pais
+);
+
+CREATE TABLE Revendedor (
+  id BIGINT PRIMARY KEY,
+  nome CHAR(100),
+  telefone BIGINT,
+)
+
+CREATE TABLE Vendas (
+  id BIGINT PRIMARY KEY,
+  vinho BIGINT references Vinho,
+  revendedor BIGINT references Revendedor,
+  preco NUMERIC,
+  data timestamp
+)
+
+
+
