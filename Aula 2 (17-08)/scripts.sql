@@ -57,10 +57,59 @@ insert into pedidos(id_produto, id_fornecedor, quantidade, data_pedido) values (
 
 -- 6) 
 
--- 6.1)
+-- 6.1) select comum (três tabelas)
 select p.id_pedido, prod.nome as produto, f.nome as fornecedor, p.quantidade, 
 	p.data_pedido, prod.qtd_estoque, prod.preco from
 	pedidos p, produtos prod, fornecedores f where
 	p.id_produto = prod.id_prod and p.id_fornecedor = f.id_forn;
 
--- 6.2)
+-- 6.2) select / inner join
+select p.id_pedido, prod.nome as produto, f.nome as fornecedor, p.quantidade, 
+	p.data_pedido, prod.qtd_estoque, prod.preco from pedidos p
+	inner join produtos prod on p.id_produto = prod.id_prod 
+	inner join fornecedores f on p.id_fornecedor = f.id_forn;
+
+-- 6.3) select / left join (duas tabelas)
+select p.id_pedido, prod.nome as produto, p.quantidade, p.data_pedido, prod.qtd_estoque, prod.preco FROM
+pedidos p left join produtos prod on p.id_produto = prod.id_prod;
+
+-- 6.4) select / left join (três tabelas)
+select p.id_pedido, prod.nome as produto, f.nome as fornecedor, p.quantidade, p.data_pedido, prod.qtd_estoque FROM
+pedidos p left join produtos prod on p.id_produto = prod.id_prod left join fornecedores f on p.id_fornecedor = f.id_forn;
+
+-- 6.5) select / right join (duas tabelas)
+select p.id_pedido, f.nome as fornecedor, p.quantidade, p.data_pedido from 
+pedidos p right join fornecedores f on p_id_fornecedor = f.id_forn;
+
+-- 6.6) select / full outer (duas tabelas)
+select * FROM pedidos p full outer join produtos prod on p.id_produto = prod.id_prod;
+
+-- 6.7) select / full outer (três tabelas)
+select * from pedidos p full outer join produtos prod 
+on p.id_pedido = prod.id_prod
+full outer join fornecedores f on p.id_fornecedor = f.id_forn
+
+
+-- 8)
+
+-- 8.1) max
+select max(preco) from produtos;
+
+-- 8.2) min
+select min(preco) from produtos;
+
+-- 8.3) avg
+select avg(preco) from produtos;
+
+-- 8.4) sum
+select sum(preco) from produtos;
+
+-- 8.5) count
+select count(*) from fornecedores;
+
+
+-- 9) Group by
+select nome, max(preco), count(*) from produtos group by nome
+
+-- 10) Having
+ select nome, max(preco), count(*) from produtos group by nome having max(preco) > 26
