@@ -1,0 +1,3 @@
+1) 
+
+Resposta: Alternativa A - Somar dois valores inteiros e retornar um valor inteiro.

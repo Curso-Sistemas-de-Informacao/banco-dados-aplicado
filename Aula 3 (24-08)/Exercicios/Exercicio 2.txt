@@ -1,0 +1,3 @@
+2)
+
+Resposta: Alternativa C - retorna um número do tipo inteiro.
