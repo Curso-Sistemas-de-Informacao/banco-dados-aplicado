@@ -23,13 +23,18 @@ insert into produto(descricao, qtd_disponivel) values ('camisa', 10);
 CREATE OR REPLACE FUNCTION atualizar_qtd_produto()
 RETURNS TRIGGER AS $$
 BEGIN
+IF (SELECT qtd_disponivel FROM produto WHERE cod_prod = NEW.id_produto) >= NEW.qtd_vendida THEN
   UPDATE produto
   SET qtd_disponivel = qtd_disponivel - NEW.qtd_vendida
   WHERE cod_prod = NEW.id_produto;
+  ELSE
+    RAISE EXCEPTION 'estoque insuficiente';
+  END IF;
   
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE TRIGGER atualizar_qtd AFTER INSERT ON itensVendas
 	FOR EACH ROW
