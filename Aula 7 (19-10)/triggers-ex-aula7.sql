@@ -18,6 +18,8 @@ create table itensVendas(
 	foreign key(id_produto) references produto(cod_prod)
 )
 
+insert into produto(descricao, qtd_disponivel) values ('camisa', 10);
+
 CREATE OR REPLACE FUNCTION atualizar_qtd_produto()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -49,6 +51,8 @@ create table tb_usuarios(
 	nome varchar(200),
 	senha varchar(10)
 );
+
+insert into tb_usuarios(nome, senha) values ('pedro', '12345');
 
 CREATE OR REPLACE FUNCTION usuario_excluido()
 RETURNS TRIGGER AS $$
